@@ -7,8 +7,6 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
 export default function ProductItem({ Item }) {
-  console.log(Item);
-
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia component="img" height="140" image={Item.image} />

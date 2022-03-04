@@ -9,12 +9,27 @@ import { Link, Outlet } from "react-router-dom";
 export default function Products() {
   let [AllProducts, SetAllProducts] = useState([]);
   let [Loading, SetLoading] = useState(false);
-  let [SearchQuery, SetSearchQuery] = useState("");
-  let [SearchedResults, setSearchedResults] = useState([]);
+  let [Backup, setBackup] = useState([]);
 
   function OnChangeHandler(e) {
-    SetSearchQuery(e.target.value);
-    let TempArray = [...AllProducts];
+    if (e.target.value.length > 0) {
+      let TempArray = [...AllProducts];
+      // console.log(e.target.value.toLowerCase());
+      let ResultArray = [];
+
+      TempArray.forEach((Product) => {
+        if (
+          Product.title.toLowerCase().includes(e.target.value.toLowerCase())
+        ) {
+          ResultArray.push(Product);
+        }
+      });
+      SetAllProducts(ResultArray);
+
+      console.log("ResultArray", ResultArray);
+    } else {
+      SetAllProducts(Backup);
+    }
   }
 
   useEffect(() => {
@@ -26,6 +41,7 @@ export default function Products() {
       const XYZ = await (await fetch(baseURL + "products")).json();
       console.log(XYZ);
       SetAllProducts(XYZ);
+      setBackup(XYZ);
       SetLoading(false);
     } catch (error) {
       console.log(error);
@@ -50,7 +66,11 @@ export default function Products() {
 
       <div>
         {AllProducts.map((Product, index) => {
-          return <ProductItem Item={Product} />;
+          return (
+            <div key={index}>
+              <ProductItem Item={Product} />
+            </div>
+          );
         })}
       </div>
       <Outlet />
