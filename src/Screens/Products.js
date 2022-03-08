@@ -4,12 +4,28 @@ import { baseURL } from "../Constants/API";
 import ProductItem from "../Components/ProductItem";
 import NavBar from "../Components/NavBar";
 import Loader from "../Components/Loader";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function Products() {
   let [AllProducts, SetAllProducts] = useState([]);
   let [Loading, SetLoading] = useState(false);
   let [Backup, setBackup] = useState([]);
+  const userdata = useSelector((state) => state.AuthReducer);
+  let navigate = useNavigate();
+
+  useEffect(() => {
+    SetLoading(true);
+    CallAPI();
+  }, []);
+
+  useEffect(() => {
+    if (userdata.IsLoggedIn) {
+      console.log("userdata", userdata);
+    } else {
+      navigate("login", { replace: true });
+    }
+  }, []);
 
   function OnChangeHandler(e) {
     if (e.target.value.length > 0) {
@@ -32,10 +48,6 @@ export default function Products() {
     }
   }
 
-  useEffect(() => {
-    SetLoading(true);
-    CallAPI();
-  }, []);
   async function CallAPI() {
     try {
       const XYZ = await (await fetch(baseURL + "products")).json();
@@ -61,8 +73,7 @@ export default function Products() {
       {/* <NavBar onSearchTextChange  /> */}
       {Loading && <Loader />}
 
-      <ButtonCustom ABC={Ashutosh} />
-      <Link to="details">Contact</Link>
+      {/* <ButtonCustom ABC={Ashutosh} /> */}
 
       <div>
         {AllProducts.map((Product, index) => {
