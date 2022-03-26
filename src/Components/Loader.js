@@ -5,9 +5,9 @@ export default function Loader() {
   return (
     <div>
       <Bars
-        heigth="100"
-        width="100"
-        color="grey"
+        heigth="1800"
+        width="1800"
+        color="black"
         ariaLabel="loading-indicator"
       />
     </div>

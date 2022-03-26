@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { ACTION_CONSTANTS } from "../Redux/Actions/ActionConstants";
+import { ACTION_TYPES } from "../Redux/Actions/ActionTypes";
 
 export default function LoginScreen(props) {
   const [emailState, SetemailState] = useState("");
@@ -9,9 +9,9 @@ export default function LoginScreen(props) {
   const ReduxData = useSelector((state) => state.AuthReducer);
   const Dispatch = useDispatch();
   let navigate = useNavigate();
-  
 
   useEffect(() => {
+    navigate("/", { replace: true });
     console.log(ReduxData);
   }, []);
 
@@ -22,7 +22,7 @@ export default function LoginScreen(props) {
     } else {
       let ABC = { emailState, PasswordState };
 
-      Dispatch({ type: ACTION_CONSTANTS.SIGN_IN_SUCCESS, payload: ABC });
+      Dispatch({ type: ACTION_TYPES.SIGN_IN_SUCCESS, payload: ABC }); //Dispatcher tells Reducer what to change in state/store. Actions are plain JS objects which tell what needs to be changed in state/store.
       navigate("/", { replace: true });
       // console.log("Success");
 

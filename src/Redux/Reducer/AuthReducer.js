@@ -1,22 +1,22 @@
-import { ACTION_CONSTANTS } from "../Actions/ActionConstants";
+import { ACTION_TYPES } from "../Actions/ActionTypes";
 
 const InitialState = {
   userdata: {},
   IsLoggedIn: false,
 };
 function AuthReducer(state = InitialState, action) {
-  console.log("action", action);
+  // console.log("action", action);
   switch (action.type) {
-    case ACTION_CONSTANTS.SIGN_IN_SUCCESS:
+    case ACTION_TYPES.SIGN_IN_SUCCESS:
       return {
         ...state,
         userdata: action.payload, // PAYLOAD =API data
         IsLoggedIn: true,
       };
-    case ACTION_CONSTANTS.SIGN_IN_FAIL:
+    case ACTION_TYPES.SIGN_IN_FAIL:
       return {
         ...state,
-        userdata: {},
+        userdata: {}, 
         IsLoggedIn: false,
       };
 

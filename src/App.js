@@ -5,6 +5,7 @@ import "./App.css";
 import store from "./Redux/Store/Store";
 import ErrorPage from "./Screens/ErrorPage";
 import LoginScreen from "./Screens/LoginScreen";
+import MyCart from "./Screens/MyCart";
 import ProductDetail from "./Screens/ProductDetail";
 import Products from "./Screens/Products";
 import TestScreeen from "./Screens/TestScreeen";
@@ -19,9 +20,11 @@ function App() {
         <Route path="details" element={<ProductDetail />} />
         <Route path="*" element={<ErrorPage />} />
         <Route path="login" element ={<LoginScreen/>}/>
+        <Route path="cart" element={<MyCart/>}/>
       </Routes>
     </BrowserRouter>
     </Provider>
+
   );
 }
 

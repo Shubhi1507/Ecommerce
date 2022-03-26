@@ -5,13 +5,16 @@ import ProductItem from "../Components/ProductItem";
 import NavBar from "../Components/NavBar";
 import Loader from "../Components/Loader";
 import { Link, Outlet, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector } from "react-redux"
 
 export default function Products() {
+  
   let [AllProducts, SetAllProducts] = useState([]);
   let [Loading, SetLoading] = useState(false);
   let [Backup, setBackup] = useState([]);
   const userdata = useSelector((state) => state.AuthReducer);
+  const cartdata = useSelector((state) => state.CartReducer);
+  //  A hook to access the redux store's state .
   let navigate = useNavigate();
 
   useEffect(() => {
@@ -20,12 +23,17 @@ export default function Products() {
   }, []);
 
   useEffect(() => {
-    if (userdata.IsLoggedIn) {
-      console.log("userdata", userdata);
-    } else {
-      navigate("login", { replace: true });
-    }
-  }, []);
+    console.log(cartdata);
+  }, [cartdata]); // Whenever Cart data will cghange , use effect will run again .
+
+  // useEffect(() => {
+  //  navigate("/", { replace: true });
+  //   // if (userdata.IsLoggedIn) {
+  //   //   console.log("userdata", userdata);
+  //   // } else {
+  //   //   ;
+  //   // }
+  // }, []);
 
   function OnChangeHandler(e) {
     if (e.target.value.length > 0) {
@@ -74,7 +82,10 @@ export default function Products() {
       {Loading && <Loader />}
 
       {/* <ButtonCustom ABC={Ashutosh} /> */}
-
+      <button onClick={() => navigate("cart", { replace: true })}>
+        
+        Go to My Cart
+      </button>
       <div>
         {AllProducts.map((Product, index) => {
           return (

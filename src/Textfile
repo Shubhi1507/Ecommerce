@@ -1,2 +1,7 @@
 array methods - filter, map, foreach, reduce
 String menthods -  length , touppercase , to lowercase , includes
+
+
+
+ REDUX 
+Reducer takes 2 parameter- State and Action
