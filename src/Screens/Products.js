@@ -6,6 +6,7 @@ import NavBar from "../Components/NavBar";
 import Loader from "../Components/Loader";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux"
+import MiniCart from "../Components/MiniCart";
 
 export default function Products() {
   
@@ -82,9 +83,10 @@ export default function Products() {
       {Loading && <Loader />}
 
       {/* <ButtonCustom ABC={Ashutosh} /> */}
-      <button onClick={() => navigate("cart", { replace: true })}>
-        
+      <MiniCart/>
+      <button onClick={() => navigate("cart", { replace: true })}>    
         Go to My Cart
+        
       </button>
       <div>
         {AllProducts.map((Product, index) => {

@@ -16,9 +16,10 @@ function CartReducer(state = InitialState, action) {
         ...state,
         cartdata: [],
       };
-    case ACTION_TYPES.REMOVE_FROM_CART:
+    case ACTION_TYPES.UPDATE_CART:
       return {
         ...state,
+        cartdata: action.payload
       };
     default:
       return state;
